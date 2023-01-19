@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 import pandas as pd
 import numpy as np
 from numpy import arange
@@ -38,7 +37,7 @@ merged_data.to_csv('merged_df.csv', index=False)
 print(merged_data)
 
 
-#Create Scatter Matrix
+#Create Scatter Matrix.
 pd.plotting.scatter_matrix(merged_data , figsize=(9.0, 9.0))
 plt.tight_layout() # helps to avoid overlap of 
 plt.title('Scatter Matrix')
