@@ -1,5 +1,4 @@
 import pandas as pd
-import numpy as np
 from numpy import arange
 from matplotlib import pyplot
 from sklearn.cluster import KMeans
