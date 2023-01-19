@@ -7,7 +7,7 @@ import matplotlib.pyplot as plt
 from scipy.optimize import curve_fit
 import scipy.optimize as opt
 
-# reading the file
+# reading the files
 def Read_data(file_name):
     """
     This function loads data from  excel file.
