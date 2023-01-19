@@ -15,7 +15,8 @@ def Read_data(file_name):
     Returns: data and transpose of the data.
     """
     data1=pd.read_excel(file_name)
-    data1=data1.iloc[[12],[39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58]] 
+    data1=data1.iloc[[12],[39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58]]
+        data1=data1.set_axis(['Year','1996','1997','1998','1999','2000','2001','2002','2003','2004','2005','2006','2007','2008','2009','2010','2011','2012','2013','2014'],axis=1,inplace=False)
     data1.reset_index(drop=True, inplace=True)
     print(data1)
     data1_t=data1.T
