@@ -1,8 +1,8 @@
 import pandas as pd
+import matplotlib.pyplot as plt
 from numpy import arange
 from matplotlib import pyplot
 from sklearn.cluster import KMeans
-import matplotlib.pyplot as plt
 from scipy.optimize import curve_fit
 
 # reading the files
