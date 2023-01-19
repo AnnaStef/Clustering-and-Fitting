@@ -5,7 +5,6 @@ from matplotlib import pyplot
 from sklearn.cluster import KMeans
 import matplotlib.pyplot as plt
 from scipy.optimize import curve_fit
-import scipy.optimize as opt
 
 # reading the files
 def Read_data(file_name):
