@@ -29,7 +29,6 @@ pdata, pdata_t = Read_data("C:\\Users\\shobi\\OneDrive\\Desktop\\Anna\\ADS\\popu
 #Concatinating the 2 columns.
 merged_data = pd.concat([cdata, pdata ])
 merged_data=merged_data.set_axis(['CO2 Emission of UAE','Population of UAE'],axis=0,inplace=False)
-merged_data=merged_data.set_axis(['Year','1996','1997','1998','1999','2000','2001','2002','2003','2004','2005','2006','2007','2008','2009','2010','2011','2012','2013','2014'],axis=1,inplace=False)
 merged_data=merged_data.T
 print(merged_data.describe())
 merged_data.to_csv('merged_df.csv', index=False)
