@@ -1,7 +1,7 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 from numpy import arange
-from matplotlib import pyplot
+
 from sklearn.cluster import KMeans
 from scipy.optimize import curve_fit
 
