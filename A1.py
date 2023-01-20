@@ -1,11 +1,12 @@
 import pandas as pd
-import matplotlib.pyplot as plt
-from matplotlib import pyplot
 from numpy import arange
+from matplotlib import pyplot
 from sklearn.cluster import KMeans
+import matplotlib.pyplot as plt
 from scipy.optimize import curve_fit
+import scipy.optimize as opt
 
-# reading the files
+# reading the file
 def Read_data(file_name):
     """
     This function loads data from  excel file.
@@ -15,8 +16,7 @@ def Read_data(file_name):
     Returns: data and transpose of the data.
     """
     data1=pd.read_excel(file_name)
-    data1=data1.iloc[[12],[39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58]]
-    data1=data1.set_axis(['Year','1996','1997','1998','1999','2000','2001','2002','2003','2004','2005','2006','2007','2008','2009','2010','2011','2012','2013','2014'],axis=1,inplace=False)
+    data1=data1.iloc[[12],[39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58]] 
     data1.reset_index(drop=True, inplace=True)
     print(data1)
     data1_t=data1.T
@@ -29,13 +29,14 @@ pdata, pdata_t = Read_data("C:\\Users\\shobi\\OneDrive\\Desktop\\Anna\\ADS\\popu
 #Concatinating the 2 columns.
 merged_data = pd.concat([cdata, pdata ])
 merged_data=merged_data.set_axis(['CO2 Emission of UAE','Population of UAE'],axis=0,inplace=False)
+merged_data=merged_data.set_axis(['Year','1996','1997','1998','1999','2000','2001','2002','2003','2004','2005','2006','2007','2008','2009','2010','2011','2012','2013','2014'],axis=1,inplace=False)
 merged_data=merged_data.T
 print(merged_data.describe())
 merged_data.to_csv('merged_df.csv', index=False)
 print(merged_data)
 
 
-#Create Scatter Matrix.
+#Create Scatter Matrix
 pd.plotting.scatter_matrix(merged_data , figsize=(9.0, 9.0))
 plt.tight_layout() # helps to avoid overlap of 
 plt.title('Scatter Matrix')
@@ -44,13 +45,23 @@ plt.show()
 # Perform KMeans clustering
 kmeans = KMeans(n_clusters=3)
 merged_data['cluster'] = kmeans.fit_predict(merged_data[['Population of UAE','CO2 Emission of UAE']])
-# Plot cluster membership
-plt.scatter(merged_data['Population of UAE'], merged_data['CO2 Emission of UAE'], c=merged_data['cluster'])
-plt.scatter(kmeans.cluster_centers_[:, 0], kmeans.cluster_centers_[:, 1], c='red', marker='.', s=500)
+# Create a list of labels for the 3 clusters
+labels = ['Cluster 1', 'Cluster 2', 'Cluster 3']
+
+# Plot the data points with different colors for each cluster
+for i in range(3):
+    plt.scatter(merged_data.loc[merged_data['cluster'] == i, 'Population of UAE'], 
+                merged_data.loc[merged_data['cluster'] == i, 'CO2 Emission of UAE'], 
+                label=labels[i])
+
+# Plot the cluster centroids
+plt.scatter(kmeans.cluster_centers_[:, 0], kmeans.cluster_centers_[:, 1], c='purple', marker='.', s=500)
 plt.xlabel('Population of UAE')
 plt.ylabel('CO2 Emission of UAE')
 plt.title('Clustered Data')
+plt.legend()
 plt.show()
+
 
 #Perform fitting using equation.
 def objective(x,a,b):
